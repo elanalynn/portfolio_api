@@ -10,7 +10,8 @@
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "express": "~4.13.4",
-    "nodemailer": "^2.6.4"
+    "nodemailer": "^2.6.4",
+    "sendgrid": "^4.5.0"
   },
   "devDependencies": {
     "dotenv": "^2.0.0"

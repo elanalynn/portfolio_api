@@ -2,16 +2,8 @@ const express = require('express')
 const router = express.Router()
 const nodeMailer = require('nodemailer')
 
-// const helper = require('sendgrid').mail
-// const from_email = new helper.Email('elanalynnnnn@gmail.com')
-// const to_email = new helper.Email('elanalynnnnn@gmail.com')
-// const subject = 'Message from elanalynn.com...'
-// const content = new helper.Content('text/plain', 'Hello, Email!')
-// const mail = new helper.Mail(from_email, subject, to_email, content)
-//
-// const sg = require('sendgrid')(process.env.SENDGRID_API_KEY)
-
 router.post('/', (req, res) => {
+  console.log('here')
 
   const messageBody =
   `<h3>From: ${req.body.name} </h3>
@@ -25,7 +17,13 @@ router.post('/', (req, res) => {
     html: messageBody,
   }
 
-  let transporter = nodeMailer.createTransport('smtps://elanalynnnnn%40gmail.com:pass@smtp.gmail.com')
+  let transporter = nodeMailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'elanalynnnnn@gmail.com',
+            pass: process.env.EMAIL_PASSWORD,
+        },
+    })
 
   transporter.sendMail(mailOptions, (err, info) => {
     if(err){
