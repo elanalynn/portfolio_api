@@ -30,7 +30,7 @@ router.post('/', (req, res, next) => {
 
   transporter.sendMail(mailOptions, function(error, info){
     if(error) next(error)
-    else res.send(`Message sent: ${info.response}`)
+    else res.send('Your message has been sent.')
   })
 })
 
