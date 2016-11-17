@@ -5,13 +5,16 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express')
 const router = express.Router()
 const nodemailer = require('nodemailer')
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
+const sgTransport = require('nodemailer-sendgrid-transport')
+
+const options = {
   auth: {
-    user: process.env.USERNAME,
-    pass: process.env.PASSWORD,
+    api_user: process.env.SENDGRID_USERNAME,
+    api_key: process.env.SENDGRID_PASSWORD,
   },
-})
+}
+
+const transporter = nodemailer.createTransport(sgTransport(options))
 
 router.get('/', (req, res) => {
   res.send('it works!')
@@ -21,7 +24,7 @@ router.post('/', (req, res, next) => {
   const mailOptions = {
     from: `${req.body.name} <${req.body.email}>`,
     to: 'ekopelevich@gmail.com',
-    subject: 'MESSAGE FROM elanalynn.com',
+    subject: 'Message from elanalynn.com',
     text: `${req.body.note}`,
   }
 
