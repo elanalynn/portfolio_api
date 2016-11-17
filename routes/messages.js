@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
   res.send('it works!')
 })
 
-router.post('/', (req, res) => {
+router.post('/', (req, res, next) => {
   const mailOptions = {
     from: `${req.body.name} <${req.body.email}>`,
     to: 'ekopelevich@gmail.com',
@@ -26,11 +26,9 @@ router.post('/', (req, res) => {
   }
 
   transporter.sendMail(mailOptions, function(error, info){
-    if(error) console.log(error)
-    else console.log(`Message sent: ${info.response}`)
+    if(error) next(error)
+    else res.send(`Message sent: ${info.response}`)
   })
-
-  res.send('Your message has been sent.')
 })
 
 module.exports = router
