@@ -1,11 +1,11 @@
 const express = require('express')
 const router = express.Router()
-const contact = require('./contact')
+const messages = require('./messages')
 
-router.use('/contact', contact)
+router.use('/messages', messages)
 
 router.get('/', function(req, res) {
-  res.send('This is the index. Go to a specific endpoint.')
+  res.send('This is the index! How exciting.')
 })
 
 module.exports = router
