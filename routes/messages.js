@@ -14,7 +14,6 @@ const transporter = nodemailer.createTransport({
 })
 
 router.post('/', (req, res) => {
-  console.log(process.env.USERNAME, process.env.PASSWORD)
   const mailOptions = {
     from: `${req.body.name} <${req.body.email}>`,
     to: 'ekopelevich@gmail.com',
@@ -27,8 +26,7 @@ router.post('/', (req, res) => {
     else console.log(`Message sent: ${info.response}`)
   })
 
-  res.end()
-
+  res.send('Your message has been sent.')
 })
 
 module.exports = router
