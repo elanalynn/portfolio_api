@@ -13,6 +13,10 @@ const transporter = nodemailer.createTransport({
   },
 })
 
+router.get('/', (req, res) => {
+  res.send('it works!')
+})
+
 router.post('/', (req, res) => {
   const mailOptions = {
     from: `${req.body.name} <${req.body.email}>`,
